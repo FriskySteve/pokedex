@@ -1,0 +1,28 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "firstName": "Admin",
+      "email": "admin@gmail.com",
+      "password": "admin"
+    },
+    {
+      "id": "fbbb",
+      "firstName": "Adam",
+      "email": "adam@gmail.com",
+      "password": "Haselko123!"
+    },
+    {
+      "id": "4aab",
+      "firstName": "asd",
+      "email": "adam2@gmail.com",
+      "password": "Haselko123!"
+    },
+    {
+      "id": "5d24",
+      "firstName": "asd",
+      "email": "ada3m@gmail.com",
+      "password": "Haselko123!"
+    }
+  ]
+}
