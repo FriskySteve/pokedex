@@ -15,7 +15,7 @@ const Home = () => {
         );
         setPokemons(response.data.results);
       } catch (err) {
-        setError("Błąd podczas pobierania danych.");
+        setError("The error occurred while fetching data.");
       } finally {
         setLoading(false);
       }
@@ -28,14 +28,10 @@ const Home = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <div>
-      <h1>Lista Pokémonów</h1>
-      <ul>
-        {pokemons?.map((pokemon, index) => (
-          // <li key={index}>{pokemon.name}</li>
-          <PokemonDetails key={index} name={pokemon.name} />
-        ))}
-      </ul>
+    <div className="flex flex-row gap-8 flex-wrap">
+      {pokemons?.map((pokemon, index) => (
+        <PokemonDetails key={index} name={pokemon.name} />
+      ))}
     </div>
   );
 };
