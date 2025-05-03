@@ -22,12 +22,11 @@ export const PokemonDetails = ({ name, children }) => {
 
   return (
     <div className="bg-gray-100 rounded-xl shadow-md p-6 max-w-xs mx-auto flex flex-col items-center">
-      <div className="w-32 h-32 flex items-center justify-center">
-        <img
-          src={pokemonDetails.imgUrl}
-          alt={`Image of ${pokemonDetails.name}`}
-        />
-      </div>
+      <img
+        className="size-32"
+        src={pokemonDetails.imgUrl}
+        alt={`Image of ${pokemonDetails.name}`}
+      />
       <h2 className="text-3xl font-bold mt-4 mb-6">
         {capitalizeFirstLetter(pokemonDetails.name)}
       </h2>

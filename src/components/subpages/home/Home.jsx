@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { PokemonDetails } from "../../shared/pokemonDetails";
+import { getPokemonList } from "../../../services/getPokemonList";
 
 const Home = () => {
   const [pokemons, setPokemons] = useState([]);
@@ -8,12 +8,10 @@ const Home = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchPokemons = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "https://pokeapi.co/api/v2/pokemon?limit=150"
-        );
-        setPokemons(response.data.results);
+        const results = await getPokemonList();
+        setPokemons(results);
       } catch (err) {
         setError("The error occurred while fetching data.");
       } finally {
@@ -21,14 +19,14 @@ const Home = () => {
       }
     };
 
-    fetchPokemons();
+    fetchData();
   }, []);
 
   if (loading) return <p>Ładowanie...</p>;
   if (error) return <p>{error}</p>;
 
   return (
-    <div className="flex flex-row gap-8 flex-wrap">
+    <div className="flex flex-row gap-8 justify-around flex-wrap">
       {pokemons?.map((pokemon, index) => (
         <PokemonDetails key={index} name={pokemon.name} />
       ))}
