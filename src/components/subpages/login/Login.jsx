@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { LoginContext, LoginProvider } from "../../../context/LoginContext";
 
 const loginSchema = z.object({
-  email: z.string().email("Nieprawidłowy adres email"),
+  name: z.string().min(1, "Imię jest wymagane"),
   password: z.string().min(1, "Hasło jest wymagane"),
 });
 
@@ -27,17 +27,17 @@ const Login = () => {
   const onSubmit = async (data) => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/users?email=${data.email}`
+        `http://localhost:3000/users?firstName=${data.name}`
       );
       const user = response.data[0];
 
       if (!user || user.password !== data.password) {
-        enqueueSnackbar("Nieprawidłowy email lub hasło", { variant: "error" });
+        enqueueSnackbar("Nieprawidłowy imię lub hasło", { variant: "error" });
         return;
       }
 
       enqueueSnackbar("Zalogowano pomyślnie", { variant: "success" });
-      localStorage.setItem("user", data.email);
+      localStorage.setItem("user", data.name);
       setIsUserLoggedIn(true);
       navigate("/");
     } catch (error) {
@@ -52,9 +52,9 @@ const Login = () => {
       className="flex flex-col gap-4 max-w-md mx-auto"
     >
       <div>
-        <label>Email</label>
-        <input type="email" {...register("email")} />
-        {errors.email && <p className="text-red-600">{errors.email.message}</p>}
+        <label>Imię</label>
+        <input {...register("name")} />
+        {errors.name && <p className="text-red-600">{errors.name.message}</p>}
       </div>
       <div>
         <label>Hasło</label>
