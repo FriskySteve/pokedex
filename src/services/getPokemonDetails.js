@@ -2,7 +2,7 @@ import axios from "axios";
 
 const baseApi = "https://pokeapi.co/api/v2/pokemon/";
 
-export const getPokemonDetails = async (name) => {
+const getPokemonDetails = async (name) => {
   const response = await axios.get(`${baseApi}${name}`);
   const data = response.data;
 
@@ -18,3 +18,5 @@ export const getPokemonDetails = async (name) => {
     },
   };
 };
+
+export default getPokemonDetails;

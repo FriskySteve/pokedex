@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { PokemonDetails } from "../../shared/pokemonDetails";
 
 const Home = () => {
   const [pokemons, setPokemons] = useState([]);
@@ -26,14 +27,13 @@ const Home = () => {
   if (loading) return <p>Ładowanie...</p>;
   if (error) return <p>{error}</p>;
 
-  console.log(pokemons[0]);
-
   return (
     <div>
       <h1>Lista Pokémonów</h1>
       <ul>
-        {pokemons.map((pokemon, index) => (
-          <li key={index}>{pokemon.name}</li>
+        {pokemons?.map((pokemon, index) => (
+          // <li key={index}>{pokemon.name}</li>
+          <PokemonDetails key={index} name={pokemon.name} />
         ))}
       </ul>
     </div>

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import getPokemonDetails from "../services/getPokemonDetails";
 
-export const useGetPokemonDetails = (name) => {
+export const usePokemonDetails = (name) => {
   const [pokemonDetails, setPokemonDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
