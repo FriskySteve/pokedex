@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
 import { getPokemonList } from "../services/getPokemonList";
 
-export const usePokemonList = (limit = 150) => {
+export const usePokemonList = (page = 1, pageSize = 15) => {
   const [pokemons, setPokemons] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const offset = (page - 1) * pageSize;
+
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
-        const results = await getPokemonList(limit);
+        const results = await getPokemonList(pageSize, offset);
         setPokemons(results);
       } catch (err) {
         setError("The error occurred while fetching data.");
@@ -19,7 +22,7 @@ export const usePokemonList = (limit = 150) => {
     };
 
     fetchData();
-  }, [limit]);
+  }, [page, pageSize]);
 
   return { pokemons, loading, error };
 };

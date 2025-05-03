@@ -21,7 +21,7 @@ export const PokemonDetails = ({ name, children }) => {
   ));
 
   return (
-    <div className="bg-gray-100 rounded-xl shadow-md p-6 max-w-xs mx-auto flex flex-col items-center">
+    <div className="bg-gray-100 rounded-xl shadow-md p-6 max-w-xs mx-auto flex flex-col items-center hover:scale-110 transition-transform duration-300">
       <img
         className="size-32"
         src={pokemonDetails.imgUrl}
