@@ -4,6 +4,7 @@ import { usePokemonList } from "../../../hooks/usePokemonList";
 
 const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchedPokemon, setSearchedPokemon] = useState("");
   const { pokemons, totalPages, loading, error } = usePokemonList(
     currentPage,
     15
@@ -17,15 +18,32 @@ const Home = () => {
     if (currentPage > 1) setCurrentPage((prev) => prev - 1);
   };
 
+  const filteredPokemons = pokemons.filter((pokemon) =>
+    pokemon.name.toLowerCase().includes(searchedPokemon.toLowerCase())
+  );
+
   if (loading) return <p>Ładowanie...</p>;
   if (error) return <p>{error}</p>;
 
   return (
     <div>
+      <div className="flex justify-center my-4">
+        <input
+          placeholder="Search"
+          value={searchedPokemon}
+          onChange={(e) => setSearchedPokemon(e.target.value)}
+          className="border p-2 w-1/2"
+        />
+      </div>
+
       <div className="flex flex-wrap gap-4 justify-around">
-        {pokemons.map((pokemon, index) => (
-          <PokemonDetails key={index} name={pokemon.name} />
-        ))}
+        {filteredPokemons.length > 0 ? (
+          filteredPokemons.map((pokemon) => (
+            <PokemonDetails key={pokemon.name} name={pokemon.name} />
+          ))
+        ) : (
+          <p>Nie znaleziono Pokémonów.</p>
+        )}
       </div>
 
       <div className="flex justify-center items-center mt-6 gap-4">
@@ -33,6 +51,7 @@ const Home = () => {
           <button
             onClick={handlePrevious}
             className="px-4 py-2 border bg-white hover:bg-gray-100"
+            aria-label="Poprzednia strona"
           >
             Wstecz
           </button>
@@ -46,6 +65,7 @@ const Home = () => {
           <button
             onClick={handleNext}
             className="px-4 py-2 border bg-white hover:bg-gray-100"
+            aria-label="Następna strona"
           >
             Dalej
           </button>
