@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { PokemonDetails } from "../../shared/pokemonDetails";
 import { usePokemonList } from "../../../hooks/usePokemonList";
+import PokemonCard from "../../shared/pokemonCard";
 
 const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -39,7 +39,7 @@ const Home = () => {
       <div className="flex flex-wrap gap-4 justify-around">
         {filteredPokemons.length > 0 ? (
           filteredPokemons.map((pokemon) => (
-            <PokemonDetails key={pokemon.name} name={pokemon.name} />
+            <PokemonCard key={pokemon.name} name={pokemon.name} />
           ))
         ) : (
           <p>Nie znaleziono Pokémonów.</p>

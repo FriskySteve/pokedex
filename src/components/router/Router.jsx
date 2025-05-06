@@ -8,6 +8,7 @@ import Favourites from "../subpages/favourites/Favourites.jsx";
 import Arena from "../subpages/arena/Arena.jsx";
 import Ranking from "../subpages/ranking/Ranking.jsx";
 import Edit from "../subpages/edit/Edit.jsx";
+import PokemonDetails from "../shared/PokemonDetails.jsx";
 
 const Router = createBrowserRouter([
   {
@@ -21,6 +22,7 @@ const Router = createBrowserRouter([
       { path: "arena", element: <Arena /> },
       { path: "ranking", element: <Ranking /> },
       { path: "edit", element: <Edit /> },
+      { path: "pokemon/:name", element: <PokemonDetails /> },
     ],
   },
 ]);
