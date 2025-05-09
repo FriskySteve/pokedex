@@ -8,6 +8,7 @@ import deleteFromArena from "../../../services/deleteFromArena";
 import { FaDeleteLeft } from "react-icons/fa6";
 import { TbPokeballOff } from "react-icons/tb";
 import { GiCrossedSabres } from "react-icons/gi";
+import { LuDoorOpen } from "react-icons/lu";
 
 const Arena = () => {
   const { pokemons, loading, error } = usePokemonList({ source: "arena" });
@@ -46,6 +47,11 @@ const Arena = () => {
     await postArenaResults(winner, looser);
   };
 
+  const handleLeaveArena = () => {
+    deleteFromArena(secondFighter);
+    deleteFromArena(firstFighter);
+  };
+
   return (
     <div className="flex justify-center items-center gap-5">
       {firstFighter ? (
@@ -61,11 +67,16 @@ const Arena = () => {
           <TbPokeballOff size={250} />
         </div>
       )}
-      <GiCrossedSabres
-        onClick={handleFight}
-        className="cursor-pointer"
-        size={50}
-      />
+      <div className="flex flex-col gap-10">
+        <GiCrossedSabres
+          onClick={fightersCounter < 2 ? null : handleFight}
+          className={`cursor-pointer transition-opacity ${
+            fightersCounter < 2 ? "opacity-50 pointer-events-none" : ""
+          }`}
+          size={50}
+        />
+        <LuDoorOpen size={50} />
+      </div>
       {secondFighter ? (
         <div className="relative">
           <PokemonCard name={secondFighter.name} />
