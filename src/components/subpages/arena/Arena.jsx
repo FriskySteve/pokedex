@@ -17,6 +17,8 @@ const Arena = () => {
     refreshKey,
   });
   const [showExit, setShowExit] = useState(false);
+  const [looser, setLooser] = useState(null);
+  const [winner, setWinner] = useState(null);
   const { enqueueSnackbar } = useSnackbar();
 
   if (loading) return <p>Ładowanie...</p>;
@@ -49,6 +51,9 @@ const Arena = () => {
       variant: "success",
     });
 
+    setLooser(looser);
+    setWinner(winner);
+
     await postArenaResults(winner, looser);
     setShowExit(true);
   };
@@ -68,7 +73,13 @@ const Arena = () => {
   return (
     <div className="flex justify-center items-center gap-5">
       {firstFighter ? (
-        <div className="relative">
+        <div
+          className={`relative ${
+            winner === firstFighter
+              ? "scale-105 animate-pulse shadow-lg shadow-yellow-400/50"
+              : ""
+          } ${looser === firstFighter ? "opacity-50" : ""}`}
+        >
           <PokemonCard name={firstFighter.name} />
           <FaDeleteLeft
             className="absolute top-2 right-2 cursor-pointer"
@@ -97,7 +108,13 @@ const Arena = () => {
         )}
       </div>
       {secondFighter ? (
-        <div className="relative">
+        <div
+          className={`relative ${
+            winner === secondFighter
+              ? "scale-105 animate-pulse shadow-lg shadow-yellow-400/50"
+              : ""
+          } ${looser === secondFighter ? "opacity-50" : ""}`}
+        >
           <PokemonCard name={secondFighter.name} />
           <FaDeleteLeft
             className="absolute top-2 right-2 cursor-pointer"
