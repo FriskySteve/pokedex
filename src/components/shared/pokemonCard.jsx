@@ -6,11 +6,10 @@ const PokemonCard = ({ name }) => {
   const { pokemonDetails, isLoading } = usePokemonDetails(name);
   const navigate = useNavigate();
   const location = useLocation();
+  const arena = location.pathname.includes(`/arena`);
 
   const handleClick = () => {
-    if (!location.pathname.includes(`/arena`)) {
-      // console.loge(location.pathname.includes(`/arena/`));
-      console.log(location);
+    if (!arena) {
       navigate(`/pokemon/${pokemonDetails.name}`);
     }
   };
@@ -34,7 +33,9 @@ const PokemonCard = ({ name }) => {
   return (
     <div
       onClick={handleClick}
-      className="bg-gray-100 rounded-xl shadow-md p-6 max-w-xs mx-auto flex flex-col items-center hover:scale-110 transition-transform duration-300"
+      className={`bg-gray-100 rounded-xl shadow-md p-6 max-w-xs mx-auto flex flex-col items-center ${
+        !arena && "hover:scale-110 transition-transform duration-300"
+      }`}
     >
       <img
         className="size-32"
