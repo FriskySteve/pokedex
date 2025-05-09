@@ -11,6 +11,9 @@ const Home = () => {
     source: "home",
   });
 
+  if (loading) return <p>Ładowanie...</p>;
+  if (error) return <p>{error}</p>;
+
   const handleNext = () => {
     if (currentPage < totalPages) setCurrentPage((prev) => prev + 1);
   };
@@ -22,9 +25,6 @@ const Home = () => {
   const filteredPokemons = pokemons.filter((pokemon) =>
     pokemon.name.toLowerCase().includes(searchedPokemon.toLowerCase())
   );
-
-  if (loading) return <p>Ładowanie...</p>;
-  if (error) return <p>{error}</p>;
 
   return (
     <div>
@@ -40,7 +40,11 @@ const Home = () => {
       <div className="flex flex-wrap gap-4 justify-around">
         {filteredPokemons.length > 0 ? (
           filteredPokemons.map((pokemon) => (
-            <PokemonCard key={pokemon.name} name={pokemon.name} />
+            <PokemonCard
+              className="hover:scale-110 transition-transform duration-300"
+              key={pokemon.name}
+              name={pokemon.name}
+            />
           ))
         ) : (
           <p>Nie znaleziono Pokémonów.</p>

@@ -2,13 +2,15 @@ import { capitalizeFirstLetter, splitWords } from "../../utils/stringUtils";
 import { usePokemonDetails } from "../../hooks/usePokemonDetails";
 import { useNavigate, useLocation } from "react-router-dom";
 
-const PokemonCard = ({ name, children }) => {
+const PokemonCard = ({ name }) => {
   const { pokemonDetails, isLoading } = usePokemonDetails(name);
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleClick = () => {
-    if (!location.pathname.includes(`/pokemon/${pokemonDetails.name}`)) {
+    if (!location.pathname.includes(`/arena`)) {
+      // console.loge(location.pathname.includes(`/arena/`));
+      console.log(location);
       navigate(`/pokemon/${pokemonDetails.name}`);
     }
   };
@@ -45,7 +47,7 @@ const PokemonCard = ({ name, children }) => {
       <div className="grid grid-cols-2 gap-x-12 gap-y-4 text-center w-full">
         {statsInfo}
       </div>
-      {children}
+      {/* {children} */}
     </div>
   );
 };

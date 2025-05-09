@@ -23,7 +23,7 @@ export const usePokemonList = ({ page, pageSize, source }) => {
         setPokemons(results);
         // setTotalPages(Math.ceil(count / pageSize));
       } catch (err) {
-        setError("The error occurred while fetching data.");
+        setError("The error occurred while fetching data.", err);
       } finally {
         setLoading(false);
       }

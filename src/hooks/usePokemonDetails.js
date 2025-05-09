@@ -6,8 +6,6 @@ export const usePokemonDetails = (name) => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (!name) return;
-
     const fetchData = async () => {
       setIsLoading(true);
       try {

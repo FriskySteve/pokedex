@@ -14,9 +14,11 @@ export const getPokemonList = async ({ limit, offset, source }) => {
   }
   if (source === "arena") {
     const response = await axios.get(arena);
+    const data = response.data;
+    // console.log(data.length);
     return {
-      results: response.data.results,
-      count: response.data.count,
+      results: data,
+      // count: response.data.count,
     };
   }
   if (source === "fav") {
