@@ -7,7 +7,8 @@ const Home = () => {
   const [searchedPokemon, setSearchedPokemon] = useState("");
   const { pokemons, totalPages, loading, error } = usePokemonList(
     currentPage,
-    15
+    15,
+    "home"
   );
 
   const handleNext = () => {
