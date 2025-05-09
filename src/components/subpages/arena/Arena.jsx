@@ -7,6 +7,7 @@ import { capitalizeFirstLetter } from "../../../utils/stringUtils";
 import deleteFromArena from "../../../services/deleteFromArena";
 import { FaDeleteLeft } from "react-icons/fa6";
 import { TbPokeballOff } from "react-icons/tb";
+import { GiCrossedSabres } from "react-icons/gi";
 
 const Arena = () => {
   const { pokemons, loading, error } = usePokemonList({ source: "arena" });
@@ -46,7 +47,7 @@ const Arena = () => {
   };
 
   return (
-    <div className="flex gap-5">
+    <div className="flex justify-center items-center gap-5">
       {firstFighter ? (
         <div className="relative">
           <PokemonCard name={firstFighter.name} />
@@ -60,7 +61,11 @@ const Arena = () => {
           <TbPokeballOff size={250} />
         </div>
       )}
-      <button onClick={handleFight}>WALCZ!</button>
+      <GiCrossedSabres
+        onClick={handleFight}
+        className="cursor-pointer"
+        size={50}
+      />
       {secondFighter ? (
         <div className="relative">
           <PokemonCard name={secondFighter.name} />
