@@ -5,11 +5,11 @@ import PokemonCard from "../../shared/pokemonCard";
 const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchedPokemon, setSearchedPokemon] = useState("");
-  const { pokemons, totalPages, loading, error } = usePokemonList(
-    currentPage,
-    15,
-    "home"
-  );
+  const { pokemons, totalPages, loading, error } = usePokemonList({
+    page: currentPage,
+    pageSize: 15,
+    source: "home",
+  });
 
   const handleNext = () => {
     if (currentPage < totalPages) setCurrentPage((prev) => prev + 1);

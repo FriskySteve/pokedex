@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const getPokemonList = async (limit, offset, source) => {
+export const getPokemonList = async ({ limit, offset, source }) => {
   const home = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`;
   const arena = "http://localhost:3000/currentlyInArena";
   const favourites = "http://localhost:3000/favouritesPokemon";
