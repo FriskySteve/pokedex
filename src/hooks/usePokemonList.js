@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getPokemonList } from "../services/getPokemonList";
 
-export const usePokemonList = ({ page, pageSize, source }) => {
+export const usePokemonList = ({ page, pageSize, source, refreshKey }) => {
   const [pokemons, setPokemons] = useState([]);
   //   Zmienic jak dojdzie dodawania pokemonow lokalnie
   //   const [totalPages, setTotalPages] = useState(0);
@@ -30,7 +30,7 @@ export const usePokemonList = ({ page, pageSize, source }) => {
     };
 
     fetchData();
-  }, [page, pageSize]);
+  }, [page, pageSize, source, refreshKey]);
 
   return { pokemons, totalPages, loading, error };
 };

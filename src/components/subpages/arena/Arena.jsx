@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { usePokemonList } from "../../../hooks/usePokemonList";
 import PokemonCard from "../../shared/pokemonCard";
 import postArenaResults from "../../../services/postArenaResults";
@@ -11,7 +11,12 @@ import { GiCrossedSabres } from "react-icons/gi";
 import { LuDoorOpen } from "react-icons/lu";
 
 const Arena = () => {
-  const { pokemons, loading, error } = usePokemonList({ source: "arena" });
+  const [refreshKey, setRefreshKey] = useState(0);
+  const { pokemons, loading, error } = usePokemonList({
+    source: "arena",
+    refreshKey,
+  });
+  const [showExit, setShowExit] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
 
   if (loading) return <p>Ładowanie...</p>;
@@ -45,11 +50,19 @@ const Arena = () => {
     });
 
     await postArenaResults(winner, looser);
+    setShowExit(true);
   };
 
   const handleLeaveArena = () => {
     deleteFromArena(secondFighter);
     deleteFromArena(firstFighter);
+    setShowExit(false);
+    setRefreshKey((prev) => prev + 1);
+  };
+
+  const handleDeleteFromArena = (name) => {
+    deleteFromArena(name);
+    setRefreshKey((prev) => prev + 1);
   };
 
   return (
@@ -59,7 +72,7 @@ const Arena = () => {
           <PokemonCard name={firstFighter.name} />
           <FaDeleteLeft
             className="absolute top-2 right-2 cursor-pointer"
-            onClick={() => deleteFromArena(firstFighter)}
+            onClick={() => handleDeleteFromArena(firstFighter)}
           />
         </div>
       ) : (
@@ -75,14 +88,20 @@ const Arena = () => {
           }`}
           size={50}
         />
-        <LuDoorOpen size={50} />
+        {showExit && (
+          <LuDoorOpen
+            size={50}
+            onClick={handleLeaveArena}
+            className="cursor-pointer"
+          />
+        )}
       </div>
       {secondFighter ? (
         <div className="relative">
           <PokemonCard name={secondFighter.name} />
           <FaDeleteLeft
             className="absolute top-2 right-2 cursor-pointer"
-            onClick={() => deleteFromArena(secondFighter)}
+            onClick={() => handleDeleteFromArena(secondFighter)}
           />
         </div>
       ) : (
