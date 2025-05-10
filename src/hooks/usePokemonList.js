@@ -4,8 +4,8 @@ import { getPokemonList } from "../services/getPokemonList";
 export const usePokemonList = ({ page, pageSize, source, refreshKey }) => {
   const [pokemons, setPokemons] = useState([]);
   //   Zmienic jak dojdzie dodawania pokemonow lokalnie
-  //   const [totalPages, setTotalPages] = useState(0);
-  const totalPages = 10;
+  const [totalPages, setTotalPages] = useState(0);
+  // const totalPages = 10;
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -21,7 +21,7 @@ export const usePokemonList = ({ page, pageSize, source, refreshKey }) => {
           source,
         });
         setPokemons(results);
-        // setTotalPages(Math.ceil(count / pageSize));
+        setTotalPages(Math.ceil(count / pageSize));
       } catch (err) {
         setError("The error occurred while fetching data.", err);
       } finally {
