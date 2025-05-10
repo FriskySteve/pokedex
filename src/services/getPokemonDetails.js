@@ -2,7 +2,7 @@ import axios from "axios";
 
 const baseApi = "https://pokeapi.co/api/v2/pokemon/";
 
-const getPokemonDetails = async (name, source) => {
+const getPokemonDetails = async (name) => {
   const response = await axios.get(`${baseApi}${name}`);
   const data = response.data;
 

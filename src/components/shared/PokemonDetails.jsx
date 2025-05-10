@@ -3,22 +3,23 @@ import { useParams } from "react-router-dom";
 import { usePokemonDetails } from "../../hooks/usePokemonDetails";
 import { capitalizeFirstLetter, splitWords } from "../../utils/stringUtils";
 import { GiSwordsEmblem } from "react-icons/gi";
-import { TiHeart } from "react-icons/ti";
+import { ImHeart } from "react-icons/im";
 import { LoginContext } from "../../context/LoginContext";
 import { useSnackbar } from "notistack";
 import getArenaRequest from "../../services/getArenaRequest";
 import getArenFightersNumber from "../../services/getArenaFightersNumber";
+import getFavouritesRequest from "../../services/getFavouritesRequest";
+import getFavouriteStatus from "../../services/getFavouriteStatus";
 
 const PokemonDetails = () => {
   const { name } = useParams();
   const { pokemonDetails, isLoading } = usePokemonDetails(name);
   const { isUserLoggedIn } = useContext(LoginContext);
   const { enqueueSnackbar } = useSnackbar();
-  const [isLoadingArenaRequest, setIsLoadingArenaRequest] = useState(false);
   const [arenaCount, setArenaCount] = useState(getArenFightersNumber);
+  const [isFavourite, setIsFavourite] = useState(getFavouriteStatus(name));
 
   const handleArenaToggle = async () => {
-    setIsLoadingArenaRequest(true);
     try {
       const result = await getArenaRequest(pokemonDetails);
       setArenaCount(result.count);
@@ -27,9 +28,26 @@ const PokemonDetails = () => {
         variant: result.success ? "success" : "warning",
       });
     } catch (err) {
-      enqueueSnackbar(`Coś poszło nie tak ${err}`, { variant: "error" });
-    } finally {
-      setIsLoadingArenaRequest(false);
+      enqueueSnackbar(
+        `Coś poszło nie tak przy dodoawaniu / usuwaniu z Areny: ${err}`,
+        { variant: "error" }
+      );
+    }
+  };
+
+  const handleFavouriteToggle = async () => {
+    try {
+      const result = await getFavouritesRequest(pokemonDetails);
+
+      setIsFavourite((prev) => !prev);
+      enqueueSnackbar(result.message, {
+        variant: result.success ? "success" : "warning",
+      });
+    } catch (err) {
+      enqueueSnackbar(
+        `Coś poszło nie tak przy dodoawaniu / usuwaniu z Ulubionych: ${err}`,
+        { variant: "error" }
+      );
     }
   };
 
@@ -52,10 +70,12 @@ const PokemonDetails = () => {
               size={24}
             />
             <p>{arenaCount} z 2</p>
-            <TiHeart
-              className="absolute top-2 right-2 cursor-pointer"
+            <ImHeart
+              className={`absolute top-2 right-2 cursor-pointer ${
+                isFavourite ? "text-red-500" : "text-gray-400"
+              }`}
               size={24}
-              color="red"
+              onClick={handleFavouriteToggle}
             />
           </>
         )}

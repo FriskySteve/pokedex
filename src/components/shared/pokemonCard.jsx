@@ -48,7 +48,6 @@ const PokemonCard = ({ name }) => {
       <div className="grid grid-cols-2 gap-x-12 gap-y-4 text-center w-full">
         {statsInfo}
       </div>
-      {/* {children} */}
     </div>
   );
 };
