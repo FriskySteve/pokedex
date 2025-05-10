@@ -11,7 +11,7 @@ const getArenaRequest = async (pokemon) => {
       await axios.delete(`${baseUrl}${existing.id}`);
       return {
         success: true,
-        message: `${pokemon.name} removed from the arena`,
+        message: `${pokemon.name} został usunięty z Areny.`,
         count: data.length - 1,
       };
     }
@@ -29,7 +29,7 @@ const getArenaRequest = async (pokemon) => {
 
     return {
       success: true,
-      message: `${pokemon.name} added to the arena`,
+      message: `${pokemon.name} został dodany na Arenę.`,
       count: data.length + 1,
     };
   } catch (error) {
