@@ -6,8 +6,6 @@ const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchedPokemon, setSearchedPokemon] = useState("");
   const { pokemons, totalPages, loading, error } = usePokemonList({
-    page: currentPage,
-    pageSize: 15,
     source: "home",
   });
 
