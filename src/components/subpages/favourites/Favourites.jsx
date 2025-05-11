@@ -2,6 +2,7 @@ import { usePokemonList } from "../../../hooks/usePokemonList";
 import PokemonCard from "../../shared/pokemonCard";
 import { useState } from "react";
 import { Button } from "../../shared/Button";
+import PageTitle from "../../shared/PageTitle";
 
 const Favourites = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -30,6 +31,7 @@ const Favourites = () => {
 
   return (
     <>
+      <PageTitle>Twoi Ulubieńcy</PageTitle>
       <div className="flex flex-wrap gap-4 justify-around">
         {pokemons.map((pokemon) => (
           <PokemonCard key={pokemon?.name} name={pokemon?.name} />

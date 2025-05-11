@@ -2,6 +2,7 @@ import { useState } from "react";
 import { usePokemonList } from "../../../hooks/usePokemonList";
 import PokemonCard from "../../shared/pokemonCard";
 import { Button } from "../../shared/Button";
+import PageTitle from "../../shared/PageTitle";
 
 const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -27,6 +28,7 @@ const Home = () => {
 
   return (
     <div>
+      <PageTitle>PokeDex</PageTitle>
       <div className="flex justify-center my-4">
         <input
           placeholder="Search"

@@ -3,6 +3,7 @@ import { usePokemonList } from "../../../hooks/usePokemonList";
 import DropdownSelector from "../../shared/DropdownSelector";
 import { capitalizeFirstLetter } from "../../../utils/stringUtils";
 import getPokemonDetails from "../../../services/getPokemonDetails";
+import PageTitle from "../../shared/PageTitle";
 
 const sortOptions = [
   { key: "Wzrost", value: "height" },
@@ -46,7 +47,7 @@ const Ranking = () => {
 
   return (
     <div className="flex flex-col items-center">
-      <h1 className="text-2xl font-bold mb-4">Ranking</h1>
+      <PageTitle>Ranking</PageTitle>
       <DropdownSelector options={sortOptions} onSelect={handleSelect} />
 
       <ul className="space-y-2 mt-4">
