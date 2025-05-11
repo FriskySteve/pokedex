@@ -4,6 +4,7 @@ import pokelogo from "../../icons/International_Pokémon_logo.svg";
 import { LoginContext } from "../../context/LoginContext";
 import { capitalizeFirstLetter } from "../../utils/stringUtils";
 import { FaUser } from "react-icons/fa";
+import { Button } from "../shared/Button";
 
 export const Header = () => {
   const { isUserLoggedIn, setIsUserLoggedIn } = useContext(LoginContext);
@@ -37,17 +38,17 @@ export const Header = () => {
         <div className="flex flex-wrap gap-2 justify-end">
           {routes.loggedIn.map(({ name, id, path }) => (
             <Link key={id} to={isUserLoggedIn ? path : ""}>
-              {name}
+              <Button>{name}</Button>
             </Link>
           ))}
           {!isUserLoggedIn ? (
             routes.notLoggedIn.map(({ name, id, path }) => (
               <Link key={id} to={path}>
-                {name}
+                <Button>{name}</Button>
               </Link>
             ))
           ) : (
-            <button onClick={() => setIsUserLoggedIn(false)}>Log out</button>
+            <Button onClick={() => setIsUserLoggedIn(false)}>Log out</Button>
           )}
         </div>
       </div>

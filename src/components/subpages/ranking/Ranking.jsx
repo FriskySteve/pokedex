@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { usePokemonList } from "../../../hooks/usePokemonList";
-import DropdownSelector from "../../shared/DropDownButton";
+import DropdownSelector from "../../shared/DropdownSelector";
 import { capitalizeFirstLetter } from "../../../utils/stringUtils";
 import getPokemonDetails from "../../../services/getPokemonDetails";
 
@@ -45,7 +45,7 @@ const Ranking = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <div>
+    <div className="flex flex-col items-center">
       <h1 className="text-2xl font-bold mb-4">Ranking</h1>
       <DropdownSelector options={sortOptions} onSelect={handleSelect} />
 

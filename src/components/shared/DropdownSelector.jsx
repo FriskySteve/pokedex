@@ -16,7 +16,7 @@ const DropdownSelector = ({ options = [], onSelect }) => {
     <div className="relative inline-block text-left">
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+        className="bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition w-36"
       >
         {selectedKey}
       </button>
@@ -27,7 +27,7 @@ const DropdownSelector = ({ options = [], onSelect }) => {
             <button
               key={option.value}
               onClick={() => handleSelect(option)}
-              className="block text-left px-4 py-2 hover:bg-gray-100"
+              className="block hover:bg-gray-100 w-36"
             >
               {option.key}
             </button>

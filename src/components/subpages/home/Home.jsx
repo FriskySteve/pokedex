@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { usePokemonList } from "../../../hooks/usePokemonList";
 import PokemonCard from "../../shared/pokemonCard";
+import { Button } from "../../shared/Button";
 
 const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -48,28 +49,20 @@ const Home = () => {
       </div>
 
       <div className="flex justify-center items-center mt-6 gap-4">
-        {currentPage > 1 && (
-          <button
-            onClick={handlePrevious}
-            className="px-4 py-2 border bg-white hover:bg-gray-100"
-            aria-label="Poprzednia strona"
-          >
-            Wstecz
-          </button>
-        )}
+        {currentPage > 1 && <Button onClick={handlePrevious}>Wstecz</Button>}
 
         <span className="text-sm font-medium">
           Strona {currentPage} z {totalPages}
         </span>
 
         {currentPage < totalPages && (
-          <button
+          <Button
             onClick={handleNext}
             className="px-4 py-2 border bg-white hover:bg-gray-100"
             aria-label="Następna strona"
           >
             Dalej
-          </button>
+          </Button>
         )}
       </div>
     </div>
