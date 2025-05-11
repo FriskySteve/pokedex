@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import pokelogo from "../../icons/International_Pokémon_logo.svg";
 import { LoginContext } from "../../context/LoginContext";
+import { capitalizeFirstLetter } from "../../utils/stringUtils";
+import { FaUser } from "react-icons/fa";
 
 export const Header = () => {
   const { isUserLoggedIn, setIsUserLoggedIn } = useContext(LoginContext);
@@ -25,7 +27,11 @@ export const Header = () => {
       </Link>
       <div className="flex flex-col items-end grow gap-4">
         <div className="flex items-center gap-2">
-          {isUserLoggedIn && <h4>{userName}</h4>}
+          {isUserLoggedIn && (
+            <div className="flex items-center gap-1">
+              <FaUser /> <h4>{capitalizeFirstLetter(userName)}</h4>
+            </div>
+          )}
           <button className="bg-red">Zmiana themu</button>
         </div>
         <div className="flex flex-wrap gap-2 justify-end">
