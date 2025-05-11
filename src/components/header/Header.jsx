@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import pokelogo from "../../icons/International_Pokémon_logo.svg";
 import { LoginContext } from "../../context/LoginContext";
@@ -28,6 +28,13 @@ export const Header = () => {
   const handleDarkMode = () => {
     setDarkMode((prev) => !prev);
   };
+
+  useEffect(() => {
+    const root = document.documentElement;
+    root.className = darkMode
+      ? "dark dark:bg-zinc-800 dark:text-yellow-500"
+      : "";
+  }, [darkMode]);
 
   return (
     <div

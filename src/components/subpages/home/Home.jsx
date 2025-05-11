@@ -1,13 +1,11 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { usePokemonList } from "../../../hooks/usePokemonList";
 import PokemonCard from "../../shared/pokemonCard";
 import { Button } from "../../shared/Button";
 import PageTitle from "../../shared/PageTitle";
 import { LoginContext } from "../../../context/LoginContext";
-import { darkBG } from "../../../utils/stringUtils";
 
 const Home = () => {
-  const { darkMode } = useContext(LoginContext);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchedPokemon, setSearchedPokemon] = useState("");
   const { pokemons, totalPages, loading, error } = usePokemonList({
@@ -30,7 +28,7 @@ const Home = () => {
   );
 
   return (
-    <div className={`dark ${darkMode ? darkBG : ""}`}>
+    <div className="dark">
       <PageTitle>PokeDex</PageTitle>
       <div className="flex justify-center my-4">
         <input

@@ -1,13 +1,10 @@
 import { usePokemonList } from "../../../hooks/usePokemonList";
 import PokemonCard from "../../shared/pokemonCard";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { Button } from "../../shared/Button";
 import PageTitle from "../../shared/PageTitle";
-import { LoginContext } from "../../../context/LoginContext";
-import { darkBG } from "../../../utils/stringUtils";
 
 const Favourites = () => {
-  const { darkMode } = useContext(LoginContext);
   const [currentPage, setCurrentPage] = useState(1);
   const { pokemons, totalPages, loading, error } = usePokemonList({
     source: "fav",
@@ -33,7 +30,7 @@ const Favourites = () => {
   };
 
   return (
-    <div className={`dark ${darkMode ? darkBG : ""}`}>
+    <div className="dark">
       <PageTitle>Twoi Ulubieńcy</PageTitle>
       <div className="flex flex-wrap gap-4 justify-around">
         {pokemons.map((pokemon) => (
