@@ -5,8 +5,6 @@ import { useState } from "react";
 const Favourites = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const { pokemons, totalPages, loading, error } = usePokemonList({
-    page: currentPage,
-    pageSize: 15,
     source: "fav",
   });
   if (loading) return <p>Ładowanie...</p>;

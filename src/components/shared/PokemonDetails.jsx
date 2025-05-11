@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { usePokemonDetails } from "../../hooks/usePokemonDetails";
 import { capitalizeFirstLetter, splitWords } from "../../utils/stringUtils";
@@ -17,7 +17,18 @@ const PokemonDetails = () => {
   const { isUserLoggedIn } = useContext(LoginContext);
   const { enqueueSnackbar } = useSnackbar();
   const [arenaCount, setArenaCount] = useState(getArenFightersNumber);
-  const [isFavourite, setIsFavourite] = useState(getFavouriteStatus(name));
+  const [isFavourite, setIsFavourite] = useState(null);
+
+  useEffect(() => {
+    const checkFavourite = async () => {
+      const status = await getFavouriteStatus(pokemonDetails);
+      setIsFavourite(status);
+    };
+
+    if (pokemonDetails) {
+      checkFavourite();
+    }
+  }, [pokemonDetails]);
 
   const handleArenaToggle = async () => {
     try {

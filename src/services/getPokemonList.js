@@ -10,7 +10,7 @@ const addUniqueApiPokemons = (localPokemons, apiPokemons) => {
   ];
 };
 
-export const getPokemonList = async ({ limit = 150, source }) => {
+export const getPokemonList = async ({ source, limit = 150 }) => {
   const homeUrl = `https://pokeapi.co/api/v2/pokemon?limit=${limit}`;
   const arenaUrl = "http://localhost:3000/currentlyInArena";
   const favouritesUrl = "http://localhost:3000/favouritesPokemon";
@@ -45,6 +45,7 @@ export const getPokemonList = async ({ limit = 150, source }) => {
       const response = await axios.get(favouritesUrl);
       return {
         results: response.data,
+        count: response.data.length,
       };
     }
 
