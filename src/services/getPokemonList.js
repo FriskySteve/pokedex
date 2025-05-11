@@ -80,6 +80,7 @@ export const getPokemonList = async ({ limit = 150, source }) => {
 
       return {
         results: combined,
+        count: combined.length,
       };
     }
 

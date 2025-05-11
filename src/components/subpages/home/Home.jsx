@@ -38,13 +38,15 @@ const Home = () => {
       </div>
 
       <div className="flex flex-wrap gap-4 justify-around">
-        {filteredPokemons.length > 0 ? (
-          filteredPokemons.map((pokemon) => (
-            <PokemonCard key={pokemon.name} name={pokemon.name} />
-          ))
-        ) : (
-          <p>Nie znaleziono Pokémonów.</p>
-        )}
+        {searchedPokemon.length > 0
+          ? filteredPokemons.map((pokemon) => (
+              <PokemonCard key={pokemon.name} name={pokemon.name} />
+            ))
+          : pokemons
+              .slice((currentPage - 1) * 15, currentPage * 15)
+              .map((pokemon) => (
+                <PokemonCard key={pokemon.name} name={pokemon.name} />
+              ))}
       </div>
 
       <div className="flex justify-center items-center mt-6 gap-4">
