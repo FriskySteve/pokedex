@@ -1,9 +1,11 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useContext } from "react";
 import { usePokemonList } from "../../../hooks/usePokemonList";
 import DropdownSelector from "../../shared/DropdownSelector";
 import { capitalizeFirstLetter } from "../../../utils/stringUtils";
 import getPokemonDetails from "../../../services/getPokemonDetails";
 import PageTitle from "../../shared/PageTitle";
+import { LoginContext } from "../../../context/LoginContext";
+import { darkBG } from "../../../utils/stringUtils";
 
 const sortOptions = [
   { key: "Wzrost", value: "height" },
@@ -13,6 +15,7 @@ const sortOptions = [
 ];
 
 const Ranking = () => {
+  const { darkMode } = useContext(LoginContext);
   const { pokemons, loading, error } = usePokemonList({ source: "home" });
   const [sortBy, setSortBy] = useState("wins");
   const [allPokemonDetails, setAllPokemonDetails] = useState([]);
@@ -46,7 +49,9 @@ const Ranking = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <div className="flex flex-col items-center">
+    <div
+      className={`dark ${darkMode ? darkBG : ""} flex flex-col items-center`}
+    >
       <PageTitle>Ranking</PageTitle>
       <DropdownSelector options={sortOptions} onSelect={handleSelect} />
 

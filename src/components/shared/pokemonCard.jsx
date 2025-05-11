@@ -4,9 +4,10 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { LoginContext } from "../../context/LoginContext";
 import { ArenaStats } from "./ArenaStats";
 import { useContext } from "react";
+import { darkBG } from "../../utils/stringUtils";
 
 const PokemonCard = ({ name }) => {
-  const { isUserLoggedIn } = useContext(LoginContext);
+  const { isUserLoggedIn, darkMode } = useContext(LoginContext);
   const { pokemonDetails, isLoading } = usePokemonDetails(name);
   const navigate = useNavigate();
   const location = useLocation();
@@ -37,7 +38,9 @@ const PokemonCard = ({ name }) => {
   return (
     <div
       onClick={handleClick}
-      className={`relative bg-gray-100 rounded-xl shadow-md p-6 max-w-xs mx-auto flex flex-col items-center ${
+      className={`dark ${
+        darkMode ? darkBG : ""
+      } relative bg-gray-100 rounded-xl shadow-md p-6 max-w-xs mx-auto flex flex-col items-center ${
         !arena && "hover:scale-110 transition-transform duration-300"
       }`}
     >

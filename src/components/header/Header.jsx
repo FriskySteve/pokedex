@@ -6,10 +6,12 @@ import { capitalizeFirstLetter } from "../../utils/stringUtils";
 import { FaUser } from "react-icons/fa";
 import { Button } from "../shared/Button";
 import SliderButton from "../shared/SliderButton";
+import { darkBG } from "../../utils/stringUtils";
 
 export const Header = () => {
   const { isUserLoggedIn, setIsUserLoggedIn } = useContext(LoginContext);
   const userName = localStorage.getItem("user");
+  const { darkMode, setDarkMode } = useContext(LoginContext);
   const routes = {
     notLoggedIn: [
       { name: "Register", id: 1, path: "register" },
@@ -23,8 +25,16 @@ export const Header = () => {
     ],
   };
 
+  const handleDarkMode = () => {
+    setDarkMode((prev) => !prev);
+  };
+
   return (
-    <div className="flex w-screen p-8 border-b-4 border-indigo-500 ">
+    <div
+      className={`dark flex w-screen p-8 border-b-4 border-indigo-500 ${
+        darkMode ? darkBG : ""
+      }`}
+    >
       <Link to={"/"} className="shrink-0">
         <img src={pokelogo} alt="pokemon logo" />
       </Link>
@@ -35,7 +45,7 @@ export const Header = () => {
               <FaUser /> <h4>{capitalizeFirstLetter(userName)}</h4>
             </div>
           )}
-          <SliderButton />
+          <SliderButton onClick={handleDarkMode} />
         </div>
         <div className="flex flex-wrap gap-2 justify-end">
           {routes.loggedIn.map(({ name, id, path }) => (

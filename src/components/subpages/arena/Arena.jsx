@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { usePokemonList } from "../../../hooks/usePokemonList";
 import PokemonCard from "../../shared/pokemonCard";
 import postArenaResults from "../../../services/postArenaResults";
@@ -10,8 +10,11 @@ import { TbPokeballOff } from "react-icons/tb";
 import { GiCrossedSabres } from "react-icons/gi";
 import { LuDoorOpen } from "react-icons/lu";
 import PageTitle from "../../shared/PageTitle";
+import { LoginContext } from "../../../context/LoginContext";
+import { darkBG } from "../../../utils/stringUtils";
 
 const Arena = () => {
+  const { darkMode } = useContext(LoginContext);
   const [refreshKey, setRefreshKey] = useState(0);
   const { pokemons, loading, error } = usePokemonList({
     source: "arena",
@@ -72,7 +75,7 @@ const Arena = () => {
   };
 
   return (
-    <>
+    <div className={`dark ${darkMode ? darkBG : ""}`}>
       <PageTitle>O Bogowie.. WALKA</PageTitle>
       <div className="flex justify-center items-center gap-5">
         {firstFighter ? (
@@ -130,7 +133,7 @@ const Arena = () => {
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 };
 

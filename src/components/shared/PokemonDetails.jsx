@@ -11,11 +11,12 @@ import getArenFightersNumber from "../../services/getArenaFightersNumber";
 import getFavouritesRequest from "../../services/getFavouritesRequest";
 import getFavouriteStatus from "../../services/getFavouriteStatus";
 import { ArenaStats } from "./ArenaStats";
+import { darkBG } from "../../utils/stringUtils";
 
 const PokemonDetails = () => {
   const { name } = useParams();
   const { pokemonDetails, isLoading } = usePokemonDetails(name);
-  const { isUserLoggedIn } = useContext(LoginContext);
+  const { isUserLoggedIn, darkMode } = useContext(LoginContext);
   const { enqueueSnackbar } = useSnackbar();
   const [arenaCount, setArenaCount] = useState(getArenFightersNumber);
   const [isFavourite, setIsFavourite] = useState(null);
@@ -67,7 +68,11 @@ const PokemonDetails = () => {
   if (!pokemonDetails) return <p>No details found for {name}</p>;
 
   return (
-    <div className="relative min-w-150 bg-gray-100 rounded-xl shadow-md p-6 max-w-xl mx-auto flex gap-10 items-stretch hover:scale-110 transition-transform duration-300">
+    <div
+      className={`dark ${
+        darkMode ? darkBG : ""
+      } relative min-w-150 bg-gray-100 rounded-xl shadow-md p-6 max-w-xl mx-auto flex gap-10 items-stretch hover:scale-110 transition-transform duration-300`}
+    >
       <div className="flex-1 flex flex-col justify-center items-center gap-4">
         <img
           className="w-32 h-32 object-contain"
