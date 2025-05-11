@@ -5,6 +5,7 @@ import { LoginContext } from "../../context/LoginContext";
 import { capitalizeFirstLetter } from "../../utils/stringUtils";
 import { FaUser } from "react-icons/fa";
 import { Button } from "../shared/Button";
+import SliderButton from "../shared/SliderButton";
 
 export const Header = () => {
   const { isUserLoggedIn, setIsUserLoggedIn } = useContext(LoginContext);
@@ -21,6 +22,7 @@ export const Header = () => {
       { name: "Edit", id: 6, path: "edit" },
     ],
   };
+
   return (
     <div className="flex w-screen p-8 border-b-4 border-indigo-500 ">
       <Link to={"/"} className="shrink-0">
@@ -29,11 +31,11 @@ export const Header = () => {
       <div className="flex flex-col items-end grow gap-4">
         <div className="flex items-center gap-2">
           {isUserLoggedIn && (
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-2">
               <FaUser /> <h4>{capitalizeFirstLetter(userName)}</h4>
             </div>
           )}
-          <button className="bg-red">Zmiana themu</button>
+          <SliderButton />
         </div>
         <div className="flex flex-wrap gap-2 justify-end">
           {routes.loggedIn.map(({ name, id, path }) => (
