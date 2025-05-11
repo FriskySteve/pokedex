@@ -10,6 +10,7 @@ import getArenaRequest from "../../services/getArenaRequest";
 import getArenFightersNumber from "../../services/getArenaFightersNumber";
 import getFavouritesRequest from "../../services/getFavouritesRequest";
 import getFavouriteStatus from "../../services/getFavouriteStatus";
+import { ArenaStats } from "./ArenaStats";
 
 const PokemonDetails = () => {
   const { name } = useParams();
@@ -66,7 +67,7 @@ const PokemonDetails = () => {
   if (!pokemonDetails) return <p>No details found for {name}</p>;
 
   return (
-    <div className="relative bg-gray-100 rounded-xl shadow-md p-6 max-w-xl mx-auto flex gap-10 items-stretch hover:scale-110 transition-transform duration-300">
+    <div className="relative min-w-150 bg-gray-100 rounded-xl shadow-md p-6 max-w-xl mx-auto flex gap-10 items-stretch hover:scale-110 transition-transform duration-300">
       <div className="flex-1 flex flex-col justify-center items-center gap-4">
         <img
           className="w-32 h-32 object-contain"
@@ -75,12 +76,14 @@ const PokemonDetails = () => {
         />
         {isUserLoggedIn && (
           <>
-            <GiSwordsEmblem
-              onClick={handleArenaToggle}
-              className="cursor-pointer"
-              size={24}
-            />
-            <p>{arenaCount} z 2</p>
+            <div className="flex flex-col items-center">
+              <GiSwordsEmblem
+                onClick={handleArenaToggle}
+                className="cursor-pointer"
+                size={24}
+              />
+              <p>{arenaCount} z 2</p>
+            </div>
             <ImHeart
               className={`absolute top-2 right-2 cursor-pointer ${
                 isFavourite ? "text-red-500" : "text-gray-400"
@@ -96,14 +99,20 @@ const PokemonDetails = () => {
         <h2 className="text-3xl font-bold mb-6 text-center">
           {capitalizeFirstLetter(pokemonDetails.name)}
         </h2>
-        <ul className="text-center space-y-1">
+        <ul className="text-center space-y-1 grid grid-cols-2">
           {Object.entries(pokemonDetails.stats).map(([key, value]) => (
             <li key={key}>
-              {splitWords(capitalizeFirstLetter(key))}: {value}
+              <p className="text-gray-500 text-sm">{value}</p>
+              <p className="whitespace-nowrap font-semibold">
+                {splitWords(capitalizeFirstLetter(key))}
+              </p>
             </li>
           ))}
         </ul>
       </div>
+      {pokemonDetails.fights && (
+        <ArenaStats stats={pokemonDetails.fights} detailed={true} />
+      )}
     </div>
   );
 };

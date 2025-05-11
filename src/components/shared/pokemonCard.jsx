@@ -1,8 +1,12 @@
 import { capitalizeFirstLetter, splitWords } from "../../utils/stringUtils";
 import { usePokemonDetails } from "../../hooks/usePokemonDetails";
 import { useNavigate, useLocation } from "react-router-dom";
+import { LoginContext } from "../../context/LoginContext";
+import { ArenaStats } from "./ArenaStats";
+import { useContext } from "react";
 
 const PokemonCard = ({ name }) => {
+  const { isUserLoggedIn } = useContext(LoginContext);
   const { pokemonDetails, isLoading } = usePokemonDetails(name);
   const navigate = useNavigate();
   const location = useLocation();
@@ -33,7 +37,7 @@ const PokemonCard = ({ name }) => {
   return (
     <div
       onClick={handleClick}
-      className={`bg-gray-100 rounded-xl shadow-md p-6 max-w-xs mx-auto flex flex-col items-center ${
+      className={`relative bg-gray-100 rounded-xl shadow-md p-6 max-w-xs mx-auto flex flex-col items-center ${
         !arena && "hover:scale-110 transition-transform duration-300"
       }`}
     >
@@ -48,6 +52,9 @@ const PokemonCard = ({ name }) => {
       <div className="grid grid-cols-2 gap-x-12 gap-y-4 text-center w-full">
         {statsInfo}
       </div>
+      {isUserLoggedIn && pokemonDetails.fights && (
+        <ArenaStats stats={pokemonDetails.fights} />
+      )}
     </div>
   );
 };
