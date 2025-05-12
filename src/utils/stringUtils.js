@@ -7,4 +7,5 @@ export const splitWords = (string) => {
   return string.split("_").join(" ");
 };
 
-export const darkBG = "dark:bg-zinc-800 dark:text-yellow-500";
+export const darkBG =
+  "dark:bg-zinc-800 dark:text-yellow-500 dark:placeholder-yellow-500";

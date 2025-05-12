@@ -66,7 +66,7 @@ const Register = () => {
   };
 
   return (
-    <div>
+    <div className="">
       <PageTitle>Formularz rejestracyjny</PageTitle>
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -76,7 +76,7 @@ const Register = () => {
           <input
             {...register("firstName")}
             placeholder="Imię"
-            className="w-full border p-2 rounded"
+            className="w-full border p-2 rounded dark:placeholder-yellow-500 placeholder-gray-400"
           />
           {errors.firstName && (
             <p className="text-red-600 text-sm">{errors.firstName.message}</p>
@@ -87,7 +87,7 @@ const Register = () => {
             type="email"
             {...register("email")}
             placeholder="Email"
-            className="w-full border p-2 rounded"
+            className="w-full border p-2 rounded dark:placeholder-yellow-500 placeholder-gray-400"
           />
           {errors.email && (
             <p className="text-red-600 text-sm">{errors.email.message}</p>
@@ -98,7 +98,7 @@ const Register = () => {
             type="password"
             {...register("password")}
             placeholder="Hasło"
-            className="w-full border p-2 rounded"
+            className="w-full border p-2 rounded dark:placeholder-yellow-500 placeholder-gray-400"
           />
           {errors.password && (
             <p className="text-red-600 text-sm">{errors.password.message}</p>
@@ -109,7 +109,7 @@ const Register = () => {
             type="password"
             {...register("repeatPassword")}
             placeholder="Powtórz hasło"
-            className="w-full border p-2 rounded"
+            className="w-full border p-2 rounded dark:placeholder-yellow-500 placeholder-gray-400"
           />
           {errors.repeatPassword && (
             <p className="text-red-600 text-sm">
