@@ -5,17 +5,12 @@ export const getRestPokemonImgs = async () => {
 
   try {
     const response = await axios.get(baseUrl);
-    const results = response.data.results;
     const count = response.data.count;
 
-    return {
-      results,
-      count,
-    };
+    return count;
   } catch (err) {
     console.error("Error fetching Pokémon list:", err);
     return {
-      results: [],
       count: 0,
       error: err.message,
     };

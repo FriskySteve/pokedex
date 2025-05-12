@@ -1,10 +1,11 @@
-import React from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "./Button";
 import PageTitle from "./PageTitle";
 import postNewPokemon from "../../services/postNewPokemon";
+import PokemonCarousel from "./PokemonCarousel";
 
 const schema = z.object({
   name: z.string().min(5, "Nazwa musi mieć minimum 5 znaków"),
@@ -34,11 +35,12 @@ const NewPokemonForm = () => {
     mode: "onTouched",
   });
 
+  const [selectedImgUrl, setSelectedImgUrl] = useState("");
+
   const onSubmit = (data) => {
     const newPokemon = {
       name: data.name,
-      imgUrl:
-        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/150.svg",
+      imgUrl: selectedImgUrl,
       stats: {
         height: data.height,
         base_experience: data.base_experience,
@@ -108,6 +110,9 @@ const NewPokemonForm = () => {
           {errors.ability && (
             <p className="text-red-600 text-sm">{errors.ability.message}</p>
           )}
+        </div>
+        <div>
+          <PokemonCarousel onImageChange={setSelectedImgUrl} />
         </div>
         <div className="flex justify-center mt-5">
           <Button type="submit">Stwórz</Button>
