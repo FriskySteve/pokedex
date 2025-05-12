@@ -22,12 +22,10 @@ export const getPokemonList = async ({ source, limit = 150 }) => {
         axios.get(homeUrl),
         axios.get(localUrl),
       ]);
-
       const combined = addUniqueApiPokemons(
         responseLocal.data,
         responseApi.data.results
       );
-
       return {
         results: combined,
         count: combined.length,

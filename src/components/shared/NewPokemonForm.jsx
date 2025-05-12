@@ -10,20 +10,17 @@ const schema = z.object({
   name: z.string().min(5, "Nazwa musi mieć minimum 5 znaków"),
   ability: z.string().min(5, "Ability musi mieć minimum 5 znaków"),
   height: z
-    .string()
+    .number()
     .min(1, "Height musi mieć przynajmniej 1 cyfrę")
-    .regex(/[0-9]/, "Height musi być liczbą.")
-    .max(1000, "Height nie moe być większe od 1000 "),
+    .max(1000, "Height nie może być większe od 1000 "),
   weight: z
-    .string()
+    .number()
     .min(1, "Weight musi mieć przynajmniej 1 cyfrę")
-    .regex(/[0-9]/, "Weight musi być liczbą.")
-    .max(1000, "Weight nie moe być większe od 1000 "),
+    .max(1000, "Weight nie może być większe od 1000 "),
   base_experience: z
-    .string()
+    .number()
     .min(1, "Base_experience musi mieć przynajmniej 1 cyfrę")
-    .regex(/[0-9]/, "Base_experience musi być liczbą.")
-    .max(1000, "Base_experience nie moe być większe od 1000 "),
+    .max(1000, "Base_experience nie może być większe od 1000 "),
 });
 
 const NewPokemonForm = () => {
@@ -66,27 +63,27 @@ const NewPokemonForm = () => {
             placeholder="Name"
             className="w-full border p-2 rounded dark:placeholder-yellow-500 placeholder-gray-400"
           />
-          {errors.firstName && (
+          {errors.name && (
             <p className="text-red-600 text-sm">{errors.name.message}</p>
           )}
         </div>
         <div className="dark:bg-zinc-700 bg-zinc-100">
           <input
-            {...register("height")}
+            {...register("height", { valueAsNumber: true })}
             placeholder="Height"
             className="w-full border p-2 rounded dark:placeholder-yellow-500 placeholder-gray-400"
           />
-          {errors.firstName && (
+          {errors.height && (
             <p className="text-red-600 text-sm">{errors.height.message}</p>
           )}
         </div>
         <div className="dark:bg-zinc-700 bg-zinc-100">
           <input
-            {...register("base_experience")}
+            {...register("base_experience", { valueAsNumber: true })}
             placeholder="Base_experience"
             className="w-full border p-2 rounded dark:placeholder-yellow-500 placeholder-gray-400"
           />
-          {errors.firstName && (
+          {errors.base_experience && (
             <p className="text-red-600 text-sm">
               {errors.base_experience.message}
             </p>
@@ -94,11 +91,11 @@ const NewPokemonForm = () => {
         </div>
         <div className="dark:bg-zinc-700 bg-zinc-100">
           <input
-            {...register("weight")}
+            {...register("weight", { valueAsNumber: true })}
             placeholder="Weight"
             className="w-full border p-2 rounded dark:placeholder-yellow-500 placeholder-gray-400"
           />
-          {errors.firstName && (
+          {errors.weight && (
             <p className="text-red-600 text-sm">{errors.weight.message}</p>
           )}
         </div>
@@ -108,14 +105,14 @@ const NewPokemonForm = () => {
             placeholder="Ability"
             className="w-full border p-2 rounded dark:placeholder-yellow-500 placeholder-gray-400"
           />
-          {errors.firstName && (
+          {errors.ability && (
             <p className="text-red-600 text-sm">{errors.ability.message}</p>
           )}
         </div>
+        <div className="flex justify-center mt-5">
+          <Button type="submit">Stwórz</Button>
+        </div>
       </form>
-      <div className="flex justify-center">
-        <Button type="submit">Stwórz</Button>
-      </div>
     </div>
   );
 };
