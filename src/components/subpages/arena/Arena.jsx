@@ -74,7 +74,7 @@ const Arena = () => {
   return (
     <div className="dark">
       <PageTitle>O Bogowie.. WALKA</PageTitle>
-      <div className="flex justify-center items-center gap-5">
+      <div className="flex flex-col justify-center items-center gap-5 lg:flex-row">
         {firstFighter ? (
           <div
             className={`relative ${

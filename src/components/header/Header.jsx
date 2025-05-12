@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import pokelogo from "../../icons/International_Pokémon_logo.svg";
 import { LoginContext } from "../../context/LoginContext";
@@ -7,6 +7,7 @@ import { FaUser } from "react-icons/fa";
 import { Button } from "../shared/Button";
 import SliderButton from "../shared/SliderButton";
 import { darkBG } from "../../utils/stringUtils";
+import { FaBars, FaTimes } from "react-icons/fa";
 
 export const Header = () => {
   const { isUserLoggedIn, setIsUserLoggedIn } = useContext(LoginContext);
@@ -24,9 +25,12 @@ export const Header = () => {
       { name: "Edit", id: 6, path: "edit" },
     ],
   };
-
   const handleDarkMode = () => {
     setDarkMode((prev) => !prev);
+  };
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev);
   };
 
   useEffect(() => {
@@ -35,6 +39,18 @@ export const Header = () => {
       ? "dark dark:bg-zinc-800 dark:text-yellow-500"
       : "";
   }, [darkMode]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <div
@@ -54,7 +70,16 @@ export const Header = () => {
           )}
           <SliderButton onClick={handleDarkMode} />
         </div>
-        <div className="flex flex-wrap gap-2 justify-end">
+        <div className="lg:hidden flex items-center">
+          <button onClick={toggleMenu} className="text-xl">
+            {isMenuOpen ? <FaTimes size={40} /> : <FaBars size={40} />}
+          </button>
+        </div>
+        <div
+          className={`${
+            isMenuOpen ? "flex flex-col gap-2" : "hidden"
+          } lg:flex flex-wrap gap-2 justify-end`}
+        >
           {routes.loggedIn.map(({ name, id, path }) => (
             <Link key={id} to={isUserLoggedIn ? path : ""}>
               <Button>{name}</Button>
