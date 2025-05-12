@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Button } from "./Button";
+import NewPokemonForm from "./NewPokemonForm";
 
 const Modal = ({ isOpen, onClose }) => {
   useEffect(() => {
@@ -21,7 +22,7 @@ const Modal = ({ isOpen, onClose }) => {
         className="bg-white rounded-lg shadow-lg max-w-md w-full relative"
         onClick={(e) => e.stopPropagation()}
       >
-        <form></form>
+        <NewPokemonForm />
         <Button onClick={onClose}>Zamknij</Button>
       </div>
     </div>
