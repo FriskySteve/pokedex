@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { checkIfImageExists } from "../../services/checkImageExists";
+import { Button } from "./Button";
 
 const PokemonCarousel = ({ onImageSelect, onImageStatusChange }) => {
   const [counter, setCounter] = useState(151);
@@ -33,20 +34,12 @@ const PokemonCarousel = ({ onImageSelect, onImageStatusChange }) => {
         }`}
       />
       <div className="flex gap-4">
-        <button
-          type="button"
-          onClick={handlePrev}
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-        >
+        <Button type={"button"} onClick={handlePrev}>
           Poprzedni
-        </button>
-        <button
-          type="button"
-          onClick={handleNext}
-          className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
-        >
+        </Button>
+        <Button type={"button"} onClick={handleNext}>
           Następny
-        </button>
+        </Button>
       </div>
       {isUsedImage && (
         <p className="text-sm text-red-500">Ten obrazek jest już używany</p>
