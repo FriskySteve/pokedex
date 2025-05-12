@@ -20,7 +20,7 @@ const Favourites = () => {
   }
 
   return (
-    <div className="dark">
+    <div>
       <PageTitle>Twoi Ulubieńcy</PageTitle>
       <PokemonLoader
         pokemons={pokemons}

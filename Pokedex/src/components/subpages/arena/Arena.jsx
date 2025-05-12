@@ -72,7 +72,7 @@ const Arena = () => {
   };
 
   return (
-    <div className="dark">
+    <div>
       <PageTitle>O Bogowie.. WALKA</PageTitle>
       <div className="flex flex-col justify-center items-center gap-5 lg:flex-row">
         {firstFighter ? (
