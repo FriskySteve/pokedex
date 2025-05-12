@@ -6,6 +6,7 @@ import { Button } from "./Button";
 import PageTitle from "./PageTitle";
 import postNewPokemon from "../../services/postNewPokemon";
 import PokemonCarousel from "./PokemonCarousel";
+import { useNavigate } from "react-router-dom";
 
 const schema = z.object({
   name: z.string().min(5, "Nazwa musi mieć minimum 5 znaków"),
@@ -37,6 +38,7 @@ const NewPokemonForm = () => {
 
   const [selectedImgUrl, setSelectedImgUrl] = useState("");
   const [isImageUsed, setIsImageUsed] = useState(false);
+  const navigate = useNavigate();
 
   const onSubmit = (data) => {
     const newPokemon = {
@@ -51,6 +53,7 @@ const NewPokemonForm = () => {
     };
     postNewPokemon(newPokemon);
     reset();
+    navigate("/");
   };
 
   return (

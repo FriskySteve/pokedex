@@ -1,5 +1,6 @@
 import axios from "axios";
 import { enqueueSnackbar } from "../utils/notistackRef";
+import { capitalizeFirstLetter } from "../utils/stringUtils";
 
 const baseUrl = "http://localhost:3000/pokemons";
 
@@ -14,9 +15,12 @@ const upsertPokemon = async (pokemon) => {
       });
     } else {
       await axios.post(baseUrl, pokemon);
-      enqueueSnackbar(`Dodano Pokemona ${pokemon.name}`, {
-        variant: "success",
-      });
+      enqueueSnackbar(
+        `Dodano Pokemona ${capitalizeFirstLetter(pokemon.name)}`,
+        {
+          variant: "success",
+        }
+      );
     }
   } catch (error) {
     console.error("Upsert error:", error);
