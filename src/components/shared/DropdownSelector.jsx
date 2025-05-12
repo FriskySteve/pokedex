@@ -22,7 +22,7 @@ const DropdownSelector = ({ options = [], onSelect }) => {
       </button>
 
       {isOpen && (
-        <div className="absolute mt-2 w-max bg-white border rounded shadow z-10">
+        <div className="absolute mt-2 w-max border rounded shadow z-10 dark:bg-zinc-800 bg-blue-200">
           {options.map((option) => (
             <button
               key={option.value}
