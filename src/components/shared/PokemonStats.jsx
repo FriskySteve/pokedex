@@ -25,7 +25,6 @@ const PokemonStats = ({ pokemon, source }) => {
 
   const handleBlur = async (key, value) => {
     setEditingKey(null);
-    // Tutaj można dodać zapis np. do backendu lub globalnego stanu
     await updatePokemonStats(pokemon, key, value);
     enqueueSnackbar(
       `Zmieniono wartość ${capitalizeFirstLetter(

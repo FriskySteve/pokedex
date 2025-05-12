@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const SliderButton = ({ onClick }) => {
   const [isOn, setIsOn] = useState(false);
-
   const toggle = () => {
     const newState = !isOn;
     setIsOn(newState);

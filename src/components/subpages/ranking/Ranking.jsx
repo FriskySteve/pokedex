@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { usePokemonList } from "../../../hooks/usePokemonList";
 import DropdownSelector from "../../shared/DropdownSelector";
 import { capitalizeFirstLetter } from "../../../utils/stringUtils";
@@ -46,7 +46,6 @@ const Ranking = () => {
     <div className="flex flex-col items-center">
       <PageTitle>Ranking</PageTitle>
       <DropdownSelector options={sortOptions} onSelect={handleSelect} />
-
       <ul className="space-y-2 mt-4">
         <li className="grid grid-cols-7 text-center font-bold">
           <div>#</div>
