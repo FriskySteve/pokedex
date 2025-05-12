@@ -11,7 +11,7 @@ const Home = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <div className="dark">
+    <div>
       <PageTitle>PokeDex</PageTitle>
       <PokemonLoader pokemons={pokemons} totalPages={totalPages} />
     </div>

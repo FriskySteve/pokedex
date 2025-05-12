@@ -36,7 +36,7 @@ const PokemonLoader = ({
             placeholder="Search"
             value={searchedPokemon}
             onChange={(e) => setSearchedPokemon(e.target.value)}
-            className="border p-2 w-1/2"
+            className="border p-2 w-1/2 dark:placeholder-yellow-500 placeholder-gray-400"
           />
         </div>
       )}

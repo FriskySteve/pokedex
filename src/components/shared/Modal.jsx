@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { Button } from "./Button";
 import NewPokemonForm from "./NewPokemonForm";
 
 const Modal = ({ isOpen, onClose }) => {
@@ -23,7 +22,6 @@ const Modal = ({ isOpen, onClose }) => {
         onClick={(e) => e.stopPropagation()}
       >
         <NewPokemonForm />
-        <Button onClick={onClose}>Zamknij</Button>
       </div>
     </div>
   );

@@ -54,13 +54,13 @@ const NewPokemonForm = () => {
   };
 
   return (
-    <div className="">
+    <div className="dark:bg-zinc-800 rounded-lg py-10 px-10 flex flex-col gap-5">
       <PageTitle>Stwórz własnego Pokemona</PageTitle>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col gap-4 max-w-md mx-auto"
       >
-        <div>
+        <div className="dark:bg-zinc-700 bg-zinc-100">
           <input
             {...register("name")}
             placeholder="Name"
@@ -70,7 +70,7 @@ const NewPokemonForm = () => {
             <p className="text-red-600 text-sm">{errors.name.message}</p>
           )}
         </div>
-        <div>
+        <div className="dark:bg-zinc-700 bg-zinc-100">
           <input
             {...register("height")}
             placeholder="Height"
@@ -80,7 +80,7 @@ const NewPokemonForm = () => {
             <p className="text-red-600 text-sm">{errors.height.message}</p>
           )}
         </div>
-        <div>
+        <div className="dark:bg-zinc-700 bg-zinc-100">
           <input
             {...register("base_experience")}
             placeholder="Base_experience"
@@ -92,7 +92,7 @@ const NewPokemonForm = () => {
             </p>
           )}
         </div>
-        <div>
+        <div className="dark:bg-zinc-700 bg-zinc-100">
           <input
             {...register("weight")}
             placeholder="Weight"
@@ -102,7 +102,7 @@ const NewPokemonForm = () => {
             <p className="text-red-600 text-sm">{errors.weight.message}</p>
           )}
         </div>
-        <div>
+        <div className="dark:bg-zinc-700 bg-zinc-100">
           <input
             {...register("ability")}
             placeholder="Ability"
@@ -112,10 +112,10 @@ const NewPokemonForm = () => {
             <p className="text-red-600 text-sm">{errors.ability.message}</p>
           )}
         </div>
-        <div className="flex justify-center">
-          <Button type="submit">Stwórz</Button>
-        </div>
       </form>
+      <div className="flex justify-center">
+        <Button type="submit">Stwórz</Button>
+      </div>
     </div>
   );
 };

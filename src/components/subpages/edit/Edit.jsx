@@ -17,9 +17,11 @@ const Edit = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <div className="dark">
+    <div className="flex flex-col justify-center center-items">
       <PageTitle>PokeDex</PageTitle>
-      <Button onClick={handleOpenModal}>Stwórz</Button>
+      <div className="flex justify-center">
+        <Button onClick={handleOpenModal}>Stwórz</Button>
+      </div>
       <Modal isOpen={isModalOpen} onClose={handleCloseModal} />
       <PokemonLoader
         pokemons={pokemons}

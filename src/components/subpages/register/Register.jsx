@@ -66,13 +66,13 @@ const Register = () => {
   };
 
   return (
-    <div className="">
+    <div className="w-[50%]">
       <PageTitle>Formularz rejestracyjny</PageTitle>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col gap-4 max-w-md mx-auto"
       >
-        <div>
+        <div className="dark:bg-zinc-700 bg-zinc-100">
           <input
             {...register("firstName")}
             placeholder="Imię"
@@ -82,7 +82,7 @@ const Register = () => {
             <p className="text-red-600 text-sm">{errors.firstName.message}</p>
           )}
         </div>
-        <div>
+        <div className="dark:bg-zinc-700 bg-zinc-100">
           <input
             type="email"
             {...register("email")}
@@ -93,7 +93,7 @@ const Register = () => {
             <p className="text-red-600 text-sm">{errors.email.message}</p>
           )}
         </div>
-        <div>
+        <div className="dark:bg-zinc-700 bg-zinc-100">
           <input
             type="password"
             {...register("password")}
@@ -104,7 +104,7 @@ const Register = () => {
             <p className="text-red-600 text-sm">{errors.password.message}</p>
           )}
         </div>
-        <div>
+        <div className="dark:bg-zinc-700 bg-zinc-100">
           <input
             type="password"
             {...register("repeatPassword")}
