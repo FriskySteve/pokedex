@@ -3,7 +3,9 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { SnackbarProvider, useSnackbar } from "notistack";
+import { useSnackbar } from "notistack";
+import { Button } from "../../shared/Button";
+import PageTitle from "../../shared/PageTitle";
 
 const schema = z
   .object({
@@ -32,6 +34,7 @@ const Register = () => {
     reset,
   } = useForm({
     resolver: zodResolver(schema),
+    mode: "onTouched",
   });
 
   const onSubmit = async (data) => {
@@ -56,46 +59,70 @@ const Register = () => {
         reset();
       }
     } catch (error) {
-      enqueueSnackbar("Wystąpił błąd podczas rejestracji", {
+      enqueueSnackbar(`Wystąpił błąd podczas rejestracji: ${error}`, {
         variant: "error",
       });
     }
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col gap-4 max-w-md mx-auto"
-    >
-      <div>
-        <label>Imię</label>
-        <input type="text" {...register("firstName")} />
-        {errors.firstName && <p>{errors.firstName.message}</p>}
-      </div>
-      <div>
-        <label>Email</label>
-        <input type="email" {...register("email")} />
-        {errors.email && <p>{errors.email.message}</p>}
-      </div>
-      <div>
-        <label>Hasło</label>
-        <input type="password" {...register("password")} />
-        {errors.password && <p>{errors.password.message}</p>}
-      </div>
-      <div>
-        <label>Powtórz hasło</label>
-        <input type="password" {...register("repeatPassword")} />
-        {errors.repeatPassword && <p>{errors.repeatPassword.message}</p>}
-      </div>
-      <button type="submit">Zarejestruj</button>
-    </form>
+    <div>
+      <PageTitle>Formularz rejestracyjny</PageTitle>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col gap-4 max-w-md mx-auto"
+      >
+        <div>
+          <input
+            {...register("firstName")}
+            placeholder="Imię"
+            className="w-full border p-2 rounded"
+          />
+          {errors.firstName && (
+            <p className="text-red-600 text-sm">{errors.firstName.message}</p>
+          )}
+        </div>
+        <div>
+          <input
+            type="email"
+            {...register("email")}
+            placeholder="Email"
+            className="w-full border p-2 rounded"
+          />
+          {errors.email && (
+            <p className="text-red-600 text-sm">{errors.email.message}</p>
+          )}
+        </div>
+        <div>
+          <input
+            type="password"
+            {...register("password")}
+            placeholder="Hasło"
+            className="w-full border p-2 rounded"
+          />
+          {errors.password && (
+            <p className="text-red-600 text-sm">{errors.password.message}</p>
+          )}
+        </div>
+        <div>
+          <input
+            type="password"
+            {...register("repeatPassword")}
+            placeholder="Powtórz hasło"
+            className="w-full border p-2 rounded"
+          />
+          {errors.repeatPassword && (
+            <p className="text-red-600 text-sm">
+              {errors.repeatPassword.message}
+            </p>
+          )}
+        </div>
+        <div className="flex justify-center">
+          <Button type="submit">Zarejestruj</Button>
+        </div>
+      </form>
+    </div>
   );
 };
 
-const RegisterWrapper = () => (
-  <SnackbarProvider maxSnack={3} autoHideDuration={3000}>
-    <Register />
-  </SnackbarProvider>
-);
-
-export default RegisterWrapper;
+export default Register;
