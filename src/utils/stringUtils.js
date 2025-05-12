@@ -9,3 +9,6 @@ export const splitWords = (string) => {
 
 export const darkBG =
   "dark:bg-zinc-800 dark:text-yellow-500 dark:placeholder-yellow-500";
+
+export const darkBGCards =
+  "dark:bg-zinc-700 dark:text-yellow-500 dark:placeholder-yellow-500";
