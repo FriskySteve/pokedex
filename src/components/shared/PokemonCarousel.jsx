@@ -1,68 +1,56 @@
-import React, { useState, useEffect } from "react";
-import { getRestPokemonImgs } from "../../services/getRestPokemonsImgs";
+import { useState, useEffect } from "react";
+import { checkIfImageExists } from "../../services/checkImageExists";
 
-const PokemonCarousel = ({ onImageChange }) => {
-  const [startId, setStartId] = useState(151);
+const PokemonCarousel = ({ onImageSelect, onImageStatusChange }) => {
   const [counter, setCounter] = useState(151);
-  const [end, setEnd] = useState(null);
-  const [imgUrl, setImgUrl] = useState("");
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getRestPokemonImgs();
-      setEnd(data);
-    };
-
-    fetchData();
-  }, [startId]);
+  const [imgUrl, setImgUrl] = useState(null);
+  const [isUsedImage, setIsUsedImage] = useState(false);
 
   useEffect(() => {
     const url = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${counter}.svg`;
     setImgUrl(url);
-    if (onImageChange) {
-      onImageChange(url);
-    }
-  }, [counter]);
+    onImageSelect?.(url);
 
-  const handleNext = () => {
-    if (end !== null && counter < end) {
-      setCounter((prev) => prev + 1);
-    }
-  };
+    const checkImage = async () => {
+      const exists = await checkIfImageExists(url);
+      setIsUsedImage(exists);
+      onImageStatusChange?.(exists);
+    };
 
-  const handlePrev = () => {
-    if (end !== null && counter > startId) {
-      setCounter((prev) => prev - 1);
-    }
-  };
+    checkImage();
+  }, [counter, onImageSelect, onImageStatusChange]);
+
+  const handleNext = () => setCounter((prev) => prev + 1);
+  const handlePrev = () => setCounter((prev) => (prev > 151 ? prev - 1 : prev));
 
   return (
     <div className="flex flex-col items-center gap-4">
-      {imgUrl && (
-        <img
-          src={imgUrl}
-          alt={`Pokemon ${counter}`}
-          className="w-40 h-40 object-contain"
-        />
-      )}
+      <img
+        src={imgUrl}
+        alt={`Pokemon ${counter}`}
+        className={`w-40 h-40 object-contain ${
+          isUsedImage ? "grayscale opacity-50" : ""
+        }`}
+      />
       <div className="flex gap-4">
         <button
           type="button"
           onClick={handlePrev}
-          disabled={counter === startId}
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:bg-blue-300"
+          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
         >
           Poprzedni
         </button>
         <button
           type="button"
           onClick={handleNext}
-          disabled={counter === end}
-          className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 disabled:bg-green-300"
+          className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
         >
           Następny
         </button>
       </div>
+      {isUsedImage && (
+        <p className="text-sm text-red-500">Ten obrazek jest już używany</p>
+      )}
     </div>
   );
 };

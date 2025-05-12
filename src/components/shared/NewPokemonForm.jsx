@@ -36,6 +36,7 @@ const NewPokemonForm = () => {
   });
 
   const [selectedImgUrl, setSelectedImgUrl] = useState("");
+  const [isImageUsed, setIsImageUsed] = useState(false);
 
   const onSubmit = (data) => {
     const newPokemon = {
@@ -112,10 +113,15 @@ const NewPokemonForm = () => {
           )}
         </div>
         <div>
-          <PokemonCarousel onImageChange={setSelectedImgUrl} />
+          <PokemonCarousel
+            onImageSelect={(url) => setSelectedImgUrl(url)}
+            onImageStatusChange={(used) => setIsImageUsed(used)}
+          />
         </div>
         <div className="flex justify-center mt-5">
-          <Button type="submit">Stwórz</Button>
+          <Button type="submit" disabled={isImageUsed}>
+            Stwórz
+          </Button>
         </div>
       </form>
     </div>

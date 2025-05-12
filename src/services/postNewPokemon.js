@@ -8,15 +8,8 @@ const upsertPokemon = async (pokemon) => {
     const responseName = await axios.get(`${baseUrl}?name=${pokemon.name}`);
     const existingName = responseName.data[0];
 
-    const responseUrl = await axios.get(`${baseUrl}?imgUrl=${pokemon.imgUrl}`);
-    const existingUrl = responseUrl.data[0];
-
     if (existingName) {
       enqueueSnackbar(`Pokemon ${pokemon.name} już istnieje`, {
-        variant: "info",
-      });
-    } else if (existingUrl) {
-      enqueueSnackbar(`Pokemon z takim obrazkiem już istnieje`, {
         variant: "info",
       });
     } else {
