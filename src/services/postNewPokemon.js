@@ -5,11 +5,18 @@ const baseUrl = "http://localhost:3000/pokemons";
 
 const upsertPokemon = async (pokemon) => {
   try {
-    const { data } = await axios.get(`${baseUrl}?name=${pokemon.name}`);
-    const existing = data[0];
+    const responseName = await axios.get(`${baseUrl}?name=${pokemon.name}`);
+    const existingName = responseName.data[0];
 
-    if (existing) {
+    const responseUrl = await axios.get(`${baseUrl}?imgUrl=${pokemon.imgUrl}`);
+    const existingUrl = responseUrl.data[0];
+
+    if (existingName) {
       enqueueSnackbar(`Pokemon ${pokemon.name} już istnieje`, {
+        variant: "info",
+      });
+    } else if (existingUrl) {
+      enqueueSnackbar(`Pokemon z takim obrazkiem już istnieje`, {
         variant: "info",
       });
     } else {
