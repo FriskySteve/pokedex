@@ -119,7 +119,7 @@ const NewPokemonForm = () => {
           />
         </div>
         <div className="flex justify-center mt-5">
-          <Button type="submit" disabled={isImageUsed}>
+          <Button type={"submit"} disabled={isImageUsed}>
             Stwórz
           </Button>
         </div>
