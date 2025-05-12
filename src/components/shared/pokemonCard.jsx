@@ -1,20 +1,20 @@
-import { capitalizeFirstLetter, splitWords } from "../../utils/stringUtils";
+import { capitalizeFirstLetter } from "../../utils/stringUtils";
 import { usePokemonDetails } from "../../hooks/usePokemonDetails";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { LoginContext } from "../../context/LoginContext";
 import { ArenaStats } from "./ArenaStats";
 import { useContext } from "react";
 import { darkBG } from "../../utils/stringUtils";
+import PokemonStats from "./PokemonStats";
 
-const PokemonCard = ({ name }) => {
+const PokemonCard = ({ name, source = "home" }) => {
   const { isUserLoggedIn, darkMode } = useContext(LoginContext);
   const { pokemonDetails, isLoading } = usePokemonDetails(name);
   const navigate = useNavigate();
-  const location = useLocation();
-  const arena = location.pathname.includes(`/arena`);
 
   const handleClick = () => {
-    if (!arena) {
+    if (source === "home") {
+      console.log(source);
       navigate(`/pokemon/${pokemonDetails.name}`);
     }
   };
@@ -26,22 +26,13 @@ const PokemonCard = ({ name }) => {
     return <p>Failed to load Pokémon details.</p>;
   }
 
-  const statsInfo = Object.entries(pokemonDetails.stats).map(([key, value]) => (
-    <div key={key}>
-      <p className="text-gray-500 text-sm">{value}</p>
-      <p className="whitespace-nowrap font-semibold">
-        {splitWords(capitalizeFirstLetter(key))}
-      </p>
-    </div>
-  ));
-
   return (
     <div
       onClick={handleClick}
       className={`dark ${
         darkMode ? darkBG : ""
       } relative bg-gray-100 rounded-xl shadow-md p-6 max-w-xs mx-auto flex flex-col items-center ${
-        !arena && "hover:scale-110 transition-transform duration-300"
+        source != "arena" && "hover:scale-110 transition-transform duration-300"
       }`}
     >
       <img
@@ -53,7 +44,7 @@ const PokemonCard = ({ name }) => {
         {capitalizeFirstLetter(pokemonDetails.name)}
       </h2>
       <div className="grid grid-cols-2 gap-x-12 gap-y-4 text-center w-full">
-        {statsInfo}
+        <PokemonStats pokemon={pokemonDetails} source={source} />
       </div>
       {isUserLoggedIn && pokemonDetails.fights && (
         <ArenaStats stats={pokemonDetails.fights} />

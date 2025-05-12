@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { usePokemonList } from "../../../hooks/usePokemonList";
 import DropdownSelector from "../../shared/DropdownSelector";
 import { capitalizeFirstLetter } from "../../../utils/stringUtils";
@@ -17,7 +17,7 @@ const Ranking = () => {
   const [sortBy, setSortBy] = useState("wins");
   const [allPokemonDetails, setAllPokemonDetails] = useState([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const fetchDetails = async () => {
       const detailsList = await Promise.all(
         pokemons.map(async (pokemon) => await getPokemonDetails(pokemon.name))

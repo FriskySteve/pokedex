@@ -83,7 +83,7 @@ const Arena = () => {
                 : ""
             } ${looser === firstFighter ? "opacity-50" : ""}`}
           >
-            <PokemonCard name={firstFighter.name} />
+            <PokemonCard name={firstFighter.name} source={"arena"} />
             <FaDeleteLeft
               className="absolute top-2 right-2 cursor-pointer"
               onClick={() => handleDeleteFromArena(firstFighter)}
@@ -118,7 +118,7 @@ const Arena = () => {
                 : ""
             } ${looser === secondFighter ? "opacity-50" : ""}`}
           >
-            <PokemonCard name={secondFighter.name} />
+            <PokemonCard name={secondFighter.name} source={"arena"} />
             <FaDeleteLeft
               className="absolute top-2 right-2 cursor-pointer"
               onClick={() => handleDeleteFromArena(secondFighter)}
