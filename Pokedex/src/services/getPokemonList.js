@@ -26,8 +26,10 @@ export const getPokemonList = async ({ source, limit = 150 }) => {
         responseLocal.data,
         responseApi.data.results
       );
+      console.log("combined: ", combined);
       return {
         results: combined,
+
         count: combined.length,
       };
     }

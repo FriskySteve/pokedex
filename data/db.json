@@ -1,6 +1,82 @@
 {
-  "users": [],
-  "favouritesPokemon": [],
-  "currentlyInArena": [],
-  "pokemons": []
+  "users": [
+    {
+      "id": "c043",
+      "firstName": "a",
+      "email": "admin@gmail.com",
+      "password": "a"
+    }
+  ],
+  "favouritesPokemon": [
+    {
+      "id": "1",
+      "name": "bulbasaur",
+      "imgUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg",
+      "stats": {
+        "height": 7,
+        "base_experience": 64,
+        "weight": 69,
+        "ability": "overgrow"
+      }
+    },
+    {
+      "id": "4",
+      "name": "charmander",
+      "imgUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/4.svg",
+      "stats": {
+        "height": 6,
+        "base_experience": 62,
+        "weight": 85,
+        "ability": "blaze"
+      }
+    }
+  ],
+  "currentlyInArena": [
+    {
+      "id": "2",
+      "name": "ivysaur",
+      "imgUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/2.svg",
+      "stats": {
+        "height": 10,
+        "base_experience": 142,
+        "weight": 130,
+        "ability": "overgrow"
+      }
+    }
+  ],
+  "pokemons": [
+    {
+      "id": 5,
+      "name": "charmeleon",
+      "imgUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/5.svg",
+      "stats": {
+        "height": 11,
+        "base_experience": "1421",
+        "weight": 190,
+        "ability": "blaze"
+      }
+    },
+    {
+      "id": 9,
+      "name": "blastoise",
+      "imgUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/9.svg",
+      "stats": {
+        "height": "161",
+        "base_experience": 265,
+        "weight": 855,
+        "ability": "torrent"
+      }
+    },
+    {
+      "id": "eead",
+      "name": "zabka",
+      "imgUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/151.svg",
+      "stats": {
+        "height": 1,
+        "base_experience": 1,
+        "weight": 1,
+        "ability": "asdfs"
+      }
+    }
+  ]
 }
