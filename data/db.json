@@ -7,30 +7,7 @@
       "password": "a"
     }
   ],
-  "favouritesPokemon": [
-    {
-      "id": "1",
-      "name": "bulbasaur",
-      "imgUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg",
-      "stats": {
-        "height": 7,
-        "base_experience": 64,
-        "weight": 69,
-        "ability": "overgrow"
-      }
-    },
-    {
-      "id": "4",
-      "name": "charmander",
-      "imgUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/4.svg",
-      "stats": {
-        "height": 6,
-        "base_experience": 62,
-        "weight": 85,
-        "ability": "blaze"
-      }
-    }
-  ],
+  "favouritesPokemon": [],
   "currentlyInArena": [
     {
       "id": "2",

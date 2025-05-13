@@ -6,15 +6,9 @@ import { useState } from "react";
 import { Button } from "../../shared/Button";
 
 const Edit = () => {
-  const { pokemons, totalPages, loading, error } = usePokemonList({
-    source: "home",
-  });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
-
-  if (loading) return <p>Ładowanie...</p>;
-  if (error) return <p>{error}</p>;
 
   return (
     <div className="flex flex-col justify-center center-items">
@@ -23,11 +17,7 @@ const Edit = () => {
         <Button onClick={handleOpenModal}>Stwórz</Button>
       </div>
       <Modal isOpen={isModalOpen} onClose={handleCloseModal} />
-      <PokemonLoader
-        pokemons={pokemons}
-        totalPages={totalPages}
-        source={"edit"}
-      />
+      <PokemonLoader source={"edit"} />
     </div>
   );
 };
