@@ -14,7 +14,6 @@ const PokemonCard = ({ name, source = "home" }) => {
 
   const handleClick = () => {
     if (source === "home") {
-      console.log(source);
       navigate(`/pokemon/${pokemonDetails.name}`);
     }
   };
