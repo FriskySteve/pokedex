@@ -16,16 +16,24 @@ const Ranking = () => {
   const { pokemons, loading, error } = usePokemonList({ source: "home" });
   const [sortBy, setSortBy] = useState("wins");
   const [allPokemonDetails, setAllPokemonDetails] = useState([]);
+
   useEffect(() => {
     const fetchDetails = async () => {
       const detailsList = await Promise.all(
-        pokemons.map(async (pokemon) => await getPokemonDetails(pokemon.name))
+        pokemons.map(async (pokemon) => {
+          if (pokemon.imgUrl) {
+            return pokemon;
+          } else {
+            return await getPokemonDetails(pokemon.name);
+          }
+        })
       );
       setAllPokemonDetails(detailsList);
     };
 
     if (pokemons.length > 0) fetchDetails();
   }, [pokemons]);
+
   const sortedPokemonList = useMemo(() => {
     return [...allPokemonDetails].sort((a, b) => {
       if (sortBy === "wins") {
@@ -35,6 +43,7 @@ const Ranking = () => {
       }
     });
   }, [allPokemonDetails, sortBy]);
+
   const handleSelect = (option) => {
     setSortBy(option);
   };

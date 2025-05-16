@@ -35,28 +35,20 @@ const Arena = () => {
     const secondFighterAttackPower =
       secondFighter.stats.base_experience * secondFighter.stats.weight;
 
-    let winner, looser;
+    const actualWinner =
+      firstFighterAttackPower > secondFighterAttackPower
+        ? firstFighter
+        : secondFighter;
+    const actualLooser =
+      actualWinner === firstFighter ? secondFighter : firstFighter;
 
-    if (firstFighterAttackPower > secondFighterAttackPower) {
-      winner = firstFighter;
-      looser = secondFighter;
-    } else if (secondFighterAttackPower > firstFighterAttackPower) {
-      winner = secondFighter;
-      looser = firstFighter;
-    } else {
-      enqueueSnackbar("Remis! Obaj przetrwali...", { variant: "info" });
-      return;
-    }
+    setWinner(actualWinner);
+    setLooser(actualLooser);
 
-    enqueueSnackbar(`Zwycięzca: ${capitalizeFirstLetter(winner.name)}`, {
+    enqueueSnackbar(`Zwycięzca: ${capitalizeFirstLetter(actualWinner.name)}`, {
       variant: "success",
     });
-
-    setLooser(looser);
-    setWinner(winner);
-
-    await postArenaResults(winner, looser);
-    setShowExit(true);
+    await postArenaResults(actualWinner, actualLooser);
   };
 
   const handleLeaveArena = () => {
@@ -83,7 +75,7 @@ const Arena = () => {
                 : ""
             } ${looser === firstFighter ? "opacity-50" : ""}`}
           >
-            <PokemonCard name={firstFighter.name} source={"arena"} />
+            <PokemonCard pokemon={firstFighter} source={"arena"} />
             <FaDeleteLeft
               className="absolute top-2 right-2 cursor-pointer"
               onClick={() => handleDeleteFromArena(firstFighter)}
@@ -118,7 +110,7 @@ const Arena = () => {
                 : ""
             } ${looser === secondFighter ? "opacity-50" : ""}`}
           >
-            <PokemonCard name={secondFighter.name} source={"arena"} />
+            <PokemonCard pokemon={secondFighter} source={"arena"} />
             <FaDeleteLeft
               className="absolute top-2 right-2 cursor-pointer"
               onClick={() => handleDeleteFromArena(secondFighter)}

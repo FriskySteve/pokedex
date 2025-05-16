@@ -92,7 +92,7 @@ const PokemonLoader = ({ enableSearch = true, source = "home" }) => {
             {displayedPokemons.map((pokemon) => (
               <PokemonCard
                 key={pokemon.name}
-                name={pokemon.name}
+                pokemon={pokemon}
                 source={source}
               />
             ))}

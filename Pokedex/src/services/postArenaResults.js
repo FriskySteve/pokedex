@@ -13,21 +13,23 @@ const upsertPokemon = async (pokemon, resultType) => {
         fights: {
           wins:
             resultType === "win"
-              ? existing.fights.wins + 1
-              : existing.fights.wins,
+              ? (existing.fights?.wins || 0) + 1
+              : existing.fights?.wins || 0,
           looses:
             resultType === "loose"
-              ? existing.fights.looses + 1
-              : existing.fights.looses,
+              ? (existing.fights?.looses || 0) + 1
+              : existing.fights?.looses || 0,
         },
         stats: {
           ...existing.stats,
           base_experience:
             resultType === "win"
-              ? existing.stats.base_experience + 10
-              : existing.stats.base_experience,
+              ? (existing.stats?.base_experience || 0) + 10
+              : existing.stats?.base_experience || 0,
         },
+        id: toString(existing.id),
       };
+
       await axios.put(`${baseUrl}/${existing.id}`, updated);
     } else {
       const newPokemon = {
@@ -40,10 +42,11 @@ const upsertPokemon = async (pokemon, resultType) => {
           ...pokemon.stats,
           base_experience:
             resultType === "win"
-              ? pokemon.stats.base_experience + 10
-              : pokemon.stats.base_experience,
+              ? (pokemon.stats?.base_experience || 0) + 10
+              : pokemon.stats?.base_experience || 0,
         },
       };
+
       await axios.post(baseUrl, newPokemon);
     }
   } catch (error) {

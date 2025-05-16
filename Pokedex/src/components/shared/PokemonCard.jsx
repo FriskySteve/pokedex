@@ -7,9 +7,13 @@ import { useContext } from "react";
 import { darkBGCards } from "../../utils/stringUtils";
 import PokemonStats from "./PokemonStats";
 
-const PokemonCard = ({ name, source = "home" }) => {
+const PokemonCard = ({ pokemon, source = "home" }) => {
   const { isUserLoggedIn, darkMode } = useContext(LoginContext);
-  const { pokemonDetails, isLoading } = usePokemonDetails(name);
+  const shouldFetchDetails = !pokemon.imgUrl;
+  const { pokemonDetails, isLoading } = usePokemonDetails(
+    pokemon,
+    shouldFetchDetails
+  );
   const navigate = useNavigate();
 
   const handleClick = () => {

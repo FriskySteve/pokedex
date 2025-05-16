@@ -12,10 +12,11 @@ import getFavouritesRequest from "../../services/getFavouritesRequest";
 import getFavouriteStatus from "../../services/getFavouriteStatus";
 import { ArenaStats } from "./ArenaStats";
 import { darkBG } from "../../utils/stringUtils";
+import { useDetailedStats } from "../../hooks/useDetailedStats";
 
 const PokemonDetails = () => {
   const { name } = useParams();
-  const { pokemonDetails, isLoading } = usePokemonDetails(name);
+  const { pokemonDetails, isLoading } = useDetailedStats(name);
   const { isUserLoggedIn, darkMode } = useContext(LoginContext);
   const { enqueueSnackbar } = useSnackbar();
   const [arenaCount, setArenaCount] = useState(getArenFightersNumber);

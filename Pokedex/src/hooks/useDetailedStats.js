@@ -1,16 +1,11 @@
 import { useState, useEffect } from "react";
 import getPokemonDetails from "../services/getPokemonDetails";
 
-export const usePokemonDetails = (pokemon, enabled = true) => {
-  const [pokemonDetails, setPokemonDetails] = useState(pokemon);
+export const useDetailedStats = (name) => {
+  const [pokemonDetails, setPokemonDetails] = useState();
   const [isLoading, setIsLoading] = useState(false);
-  let [name] = useState(pokemon.name);
 
   useEffect(() => {
-    if (!enabled) {
-      setPokemonDetails(pokemon);
-      return;
-    }
     const fetchData = async () => {
       setIsLoading(true);
       try {
@@ -24,7 +19,7 @@ export const usePokemonDetails = (pokemon, enabled = true) => {
     };
 
     fetchData();
-  }, [pokemon, enabled]);
+  }, [name]);
 
   return { pokemonDetails, isLoading };
 };

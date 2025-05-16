@@ -10,8 +10,8 @@ const addUniqueApiPokemons = (localPokemons, apiPokemons) => {
   ];
 };
 
-export const getPokemonList = async ({ source, limit = 150 }) => {
-  const homeUrl = `https://pokeapi.co/api/v2/pokemon?limit=${limit}`;
+const getPokemonList = async ({ source }) => {
+  const homeUrl = `https://pokeapi.co/api/v2/pokemon?limit=150`;
   const arenaUrl = "http://localhost:3000/currentlyInArena";
   const favouritesUrl = "http://localhost:3000/favouritesPokemon";
   const localUrl = "http://localhost:3000/pokemons";
@@ -26,7 +26,6 @@ export const getPokemonList = async ({ source, limit = 150 }) => {
         responseLocal.data,
         responseApi.data.results
       );
-      console.log("combined: ", combined);
       return {
         results: combined,
 
@@ -58,3 +57,5 @@ export const getPokemonList = async ({ source, limit = 150 }) => {
     };
   }
 };
+
+export default getPokemonList;

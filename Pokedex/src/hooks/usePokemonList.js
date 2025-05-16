@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getPokemonList } from "../services/getPokemonList";
+import getPokemonList from "../services/getPokemonList";
 
 export const usePokemonList = ({ source, refreshKey }) => {
   const [pokemons, setPokemons] = useState([]);
