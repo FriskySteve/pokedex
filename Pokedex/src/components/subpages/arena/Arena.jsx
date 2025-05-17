@@ -44,6 +44,7 @@ const Arena = () => {
 
     setWinner(actualWinner);
     setLooser(actualLooser);
+    setShowExit(true);
 
     enqueueSnackbar(`Zwycięzca: ${capitalizeFirstLetter(actualWinner.name)}`, {
       variant: "success",
